@@ -7,7 +7,7 @@ def create_envs(session: Session):
                 'Party', 'AEM', 'Product Catalogue', 'Dirty Cache', 'EWCO']:
                 app_status = ApplicationStatus(group='E2E', name=app)
                 session.add(app_status)
-                print(f'Environment {app} added to E2E')
+                print(f'Environment {app_status.name} added to E2E with slug {app_status.slug}')
                 session.flush()
 
 

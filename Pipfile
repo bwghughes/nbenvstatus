@@ -10,6 +10,12 @@ name = "pypi"
 apistar = "*"
 sqlalchemy = "*"
 arrow = "*"
+pytest = "*"
+requests = "*"
+schedule = "*"
+python-slugify = "*"
 
 
 [dev-packages]
+
+pytest-cov = "*"

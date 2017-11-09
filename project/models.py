@@ -1,10 +1,10 @@
 """ Application status models """
-from apistar.backends.sqlalchemy_backend import Session
-from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 
-from project.utils import GUID
+from apistar.backends.sqlalchemy_backend import Session
+from slugify import slugify
 
 Base = declarative_base()
 
@@ -14,4 +14,12 @@ class ApplicationStatus(Base):
     name = Column(String)
     status = Column(Boolean, default=False)
     group = Column(String)
+    slug = Column(String)
     last_updated = Column(DateTime(timezone=True), default=func.now())
+
+    @staticmethod
+    def generate_slug(target, value, oldvalue, initiator):
+        if value and (not target.slug or value != oldvalue):
+            target.slug = slugify(value)
+
+event.listen(ApplicationStatus.name, 'set', ApplicationStatus.generate_slug, retval=False)
