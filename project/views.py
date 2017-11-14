@@ -13,9 +13,9 @@ def index(session: Session):
     return render_template('index.html', envstatus=statuses)
 
 
-def update(session: Session, status_id: int, status: bool):
-    status = session.query(ApplicationStatus)\
-             .get(status_id)
+def update(session: Session, slug: str, status: bool):
+    """ Update the status """
+    status = session.query(ApplicationStatus).filter_by(slug=slug).first()
     status.status = True
     status.last_updated = datetime.now()
     session.commit()

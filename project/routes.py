@@ -5,7 +5,7 @@ from project.views import index, update
 
 ROUTES = [
     Route('/', 'GET', index),
-    Route('/update/{status_id}', 'PUT', update),
+    Route('/update/{slug}', 'PUT', update),
     Route('/static/{path}', 'GET', serve_static),
     Include('/docs', docs_urls),
 ]

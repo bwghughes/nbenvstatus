@@ -26,7 +26,7 @@ def test_update_on_id():
     assert b"card-success" not in response.content
     
     # Make one green and check
-    response = client.put('/update/1', dict(data=dict(status=False)))
+    response = client.put('/update/credit-decision-engine', dict(data=dict(status=False)))
     assert response.status_code == 204
     response = client.get("/")
     assert b"card-success" in response.content
@@ -34,7 +34,7 @@ def test_update_on_id():
     assert count == 1
 
     # And another
-    response = client.put('/update/2', dict(data=dict(status=False)))
+    response = client.put('/update/mdm', dict(data=dict(status=False)))
     assert response.status_code == 204
     response = client.get("/")
     assert b"card-success" in response.content

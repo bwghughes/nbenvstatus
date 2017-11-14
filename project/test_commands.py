@@ -10,6 +10,6 @@ def mock_session():
 
 def test_create_env(mock_session):
     p = create_envs(mock_session)
-    #assert mock_session.called
-    assert False
+    assert mock_session.add.called
+
     
