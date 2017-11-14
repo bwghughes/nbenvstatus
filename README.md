@@ -35,6 +35,12 @@
 
     ``` runtests.bat ```
 
+8. Run the dashboard server:
+
+    ``` start-server.bat ```
+
+
+
 
 
 

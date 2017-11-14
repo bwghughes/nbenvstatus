@@ -20,3 +20,11 @@ def update(session: Session, slug: str, status: bool):
     status.last_updated = datetime.now()
     session.commit()
     return Response(status=204)
+
+
+def create(session: Session, name: str):
+    app_status = ApplicationStatus(name=name)
+    session.add(app_status)
+    print(f'Environment {app_status.name} added to E2E with slug {app_status.slug}')
+    session.flush()
+    return Response(status=200)

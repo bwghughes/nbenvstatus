@@ -13,7 +13,6 @@ class ApplicationStatus(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     status = Column(Boolean, default=False)
-    group = Column(String)
     slug = Column(String)
     last_updated = Column(DateTime(timezone=True), default=func.now())
 
