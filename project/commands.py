@@ -9,12 +9,3 @@ def create_envs(session: Session):
                 session.add(app_status)
                 print(f'Environment {app_status.name} added with slug {app_status.slug}')
                 session.flush()
-
-
-def create_env(session: Session, group: str, name: str):
-        """ Create a single environment. Group and Name are required. """
-        app_status = ApplicationStatus(name=name)
-        session.add(app_status)
-        session.flush()
-        print(f'Environment {name} added to {group}')
-

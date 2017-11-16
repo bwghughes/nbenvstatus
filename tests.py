@@ -52,7 +52,6 @@ def test_create_works_and_id_displayed_on_page():
     assert b"test-app" in response.content
     
 
-
 def test_check_404_for_non_existant_env():
     client = TestClient(app)
     response = client.get('/some-silly-slug')
@@ -65,6 +64,7 @@ def test_check_200_for_existing():
     assert response.status_code == 200
     response = client.get('/test-app')
     assert response.status_code == 200
+
 
 def test_create_gives_400_if_no_name_query_parameter():
     client = TestClient(app)

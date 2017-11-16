@@ -8,7 +8,7 @@ test:
 	export ENVSTATUS_DB_URL=sqlite:///test.db && \
 	apistar create_tables && \
 	apistar create_envs && \
-	py.test --cov=project project tests.py && \
+	py.test --cov=project --cov-report=term-missing project tests.py && \
 	rm -f test.db
 
 envcheck:
@@ -16,5 +16,5 @@ envcheck:
 	py.test environment_tests.py
 
 clean:
-	rm test.db && rm envstatus.db
+	rm *.db
 
