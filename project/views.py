@@ -1,7 +1,7 @@
 """ Views, includes HTML and API """
 from datetime import datetime
 from apistar import annotate, render_template, Response
-from apistar.renderers import HTMLRenderer
+from apistar.renderers import HTMLRenderer, JSONRenderer
 from apistar.backends.sqlalchemy_backend import Session
 from project.models import ApplicationStatus
 
@@ -13,6 +13,16 @@ def index(session: Session):
     return render_template('index.html', envstatus=statuses)
 
 
+@annotate(renderers=[JSONRenderer()])
+def check(session: Session, slug: str):
+    """ Update the status """
+    status = session.query(ApplicationStatus).filter_by(slug=slug).first()
+    if status:  
+        return {'name': status.name, 'status': status.status}
+    else:
+        return Response(status=404)
+
+
 def update(session: Session, slug: str, status: bool):
     """ Update the status """
     status = session.query(ApplicationStatus).filter_by(slug=slug).first()
@@ -22,9 +32,13 @@ def update(session: Session, slug: str, status: bool):
     return Response(status=204)
 
 
+@annotate(renderers=[JSONRenderer()])
 def create(session: Session, name: str):
-    app_status = ApplicationStatus(name=name)
-    session.add(app_status)
-    print(f'Environment {app_status.name} added to E2E with slug {app_status.slug}')
-    session.flush()
-    return Response(status=200)
+    """ Create new """
+    if name:
+        status = ApplicationStatus(name=name)
+        session.add(status)
+        session.flush()
+        return {'name': status.name, 'status': status.status, 'slug': status.slug}
+    else:
+        return Response(status=400)
