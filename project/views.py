@@ -1,8 +1,11 @@
 """ Views, includes HTML and API """
+import typing
 from datetime import datetime
-from apistar import annotate, render_template, Response
-from apistar.renderers import HTMLRenderer, JSONRenderer
+
+from apistar import Response, annotate, render_template
 from apistar.backends.sqlalchemy_backend import Session
+from apistar.renderers import HTMLRenderer, JSONRenderer
+
 from project.models import ApplicationStatus
 
 
@@ -14,13 +17,19 @@ def index(session: Session):
 
 
 @annotate(renderers=[JSONRenderer()])
-def check(session: Session, slug: str):
+def check(session: Session, slug: str) -> Response:
     """ Update the status """
     status = session.query(ApplicationStatus).filter_by(slug=slug).first()
     if status:  
         return {'name': status.name, 'status': status.status}
     else:
         return Response(status=404)
+
+@annotate(renderers=[JSONRenderer()])
+def list_environments(session: Session) -> typing.List[ApplicationStatus]:
+    statuses = session.query(ApplicationStatus).all()
+    return [status.to_dict() for status in statuses]
+
 
 
 def update(session: Session, slug: str, status: bool):

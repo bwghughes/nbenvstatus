@@ -21,4 +21,8 @@ class ApplicationStatus(Base):
         if value and (not target.slug or value != oldvalue):
             target.slug = slugify(value)
 
+    def to_dict(self):
+        return {'name': self.name, 'status': self.status, 
+                'slug': self.slug, }
+
 event.listen(ApplicationStatus.name, 'set', ApplicationStatus.generate_slug, retval=False)

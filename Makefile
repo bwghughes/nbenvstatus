@@ -1,5 +1,6 @@
 start:
 	export ENVSTATUS_DB_URL="sqlite:///envstatus.db" && \
+	apistar create_envs && \
 	apistar create_tables && \
 	apistar run
 
