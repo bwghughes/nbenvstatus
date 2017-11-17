@@ -20,7 +20,7 @@
   <body>
     <div class="container">
         <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-2 h1">Nedbank Environment Monitoring</span>
+            <span class="navbar-brand mb-2 h1">{{ page_name }} Environment Monitoring</span>
           </nav>
         <div class="card-columns">
         {% for env in envstatus %}
@@ -31,11 +31,10 @@
         {% endif %}
             <div class="card-block">
               <blockquote class="card-title">
-                  <p>{{ env.name }}</p>
-                  <p>{{ env.slug }}</p>
+                  <p><h3>{{ env.name }}</h3></p>
                 </blockquote>
             </div>
-            <p class="card-text"><small>Last updated {{ env.last_updated }}</small></p>
+            <p class="card-text"><small>Last updated {{ arrow.get(env.last_updated).humanize() }}</small></p>
         </div>
         {% endfor %}
       </div>

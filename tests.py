@@ -23,8 +23,8 @@ def test_index(test_data):
     client = TestClient(app)
     response = client.get('/')
     assert response.status_code == 200
-    assert b"Test App 1" in response.content
-    assert b"Test App 1" in response.content
+    assert b"TEST APP 1" in response.content
+    assert b"TEST APP 2" in response.content
 
 
 def test_update_on_id():
@@ -36,7 +36,8 @@ def test_update_on_id():
     assert b"card-success" not in response.content
     
     # Make one green and check
-    response = client.put('/environments/test-app-1', dict(data=dict(status=False)))
+    test_result = True
+    response = client.put(f"/environments/test-app-1?test_result={test_result}")
     assert response.status_code == 204
     response = client.get("/")
     assert b"card-success" in response.content
@@ -44,7 +45,7 @@ def test_update_on_id():
     assert count == 1
 
     # And another
-    response = client.put('/environments/test-app-2', dict(data=dict(status=False)))
+    response = client.put(f"/environments/test-app-2?test_result={test_result}")
     assert response.status_code == 204
     response = client.get("/")
     assert b"card-success" in response.content
@@ -59,7 +60,7 @@ def test_create_works_and_id_displayed_on_page():
     response = client.get('/environments/test-app')
     assert response.status_code == 200
     response = client.get('/')
-    assert b"test-app" in response.content
+    assert b"TEST APP" in response.content
 
 
 def test_check_404_for_non_existant_env():

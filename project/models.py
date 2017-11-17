@@ -25,4 +25,7 @@ class ApplicationStatus(Base):
         return {'name': self.name, 'status': self.status, 
                 'slug': self.slug, }
 
+    def __repr__(self):
+        return f"<ApplicationStatus name={self.name}>"
+
 event.listen(ApplicationStatus.name, 'set', ApplicationStatus.generate_slug, retval=False)
