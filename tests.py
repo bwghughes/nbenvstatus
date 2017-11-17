@@ -38,7 +38,8 @@ def test_update_on_id():
     # Make one green and check
     test_result = True
     response = client.put(f"/environments/test-app-1?test_result={test_result}")
-    assert response.status_code == 204
+    assert response.status_code == 200
+    assert response.json()
     response = client.get("/")
     assert b"card-success" in response.content
     count = sum(1 for _ in re.finditer(r'\b%s\b' % re.escape("card-success"), str(response.content)))
@@ -46,7 +47,8 @@ def test_update_on_id():
 
     # And another
     response = client.put(f"/environments/test-app-2?test_result={test_result}")
-    assert response.status_code == 204
+    assert response.status_code == 200
+    assert response.json()
     response = client.get("/")
     assert b"card-success" in response.content
     count = sum(1 for _ in re.finditer(r'\b%s\b' % re.escape("card-success"), str(response.content)))

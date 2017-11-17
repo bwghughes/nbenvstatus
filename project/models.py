@@ -5,6 +5,7 @@ from sqlalchemy.sql import func
 
 from apistar.backends.sqlalchemy_backend import Session
 from slugify import slugify
+import arrow
 
 Base = declarative_base()
 
@@ -23,7 +24,8 @@ class ApplicationStatus(Base):
 
     def to_dict(self):
         return {'name': self.name, 'status': self.status, 
-                'slug': self.slug, }
+                'slug': self.slug, 
+                'last_updated': arrow.get(self.last_updated).humanize()}
 
     def __repr__(self):
         return f"<ApplicationStatus name={self.name}>"

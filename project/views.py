@@ -13,7 +13,7 @@ from project.models import ApplicationStatus
 
 @annotate(renderers=[HTMLRenderer()])
 def index(session: Session) -> Response:
-    """ Home view. """
+    """ Root view returning Dashboard page. """
     statuses = session.query(ApplicationStatus)
     context = {'envstatus': statuses, 
                'arrow': arrow,
@@ -26,7 +26,7 @@ def check(session: Session, slug: str) -> Response:
     """ Update the status """
     status = session.query(ApplicationStatus).filter_by(slug=slug).first()
     if status:  
-        return {'name': status.name, 'status': status.status}
+        return status.to_dict()
     else:
         return Response(status=404)
 
@@ -37,15 +37,15 @@ def list_environments(session: Session) -> typing.List[ApplicationStatus]:
     return [status.to_dict() for status in statuses]
 
 
-
+@annotate(renderers=[JSONRenderer()])
 def update(session: Session, slug: str, test_result: bool) -> Response:
-    """ Update the status """
+    """ Update the status of the environment"""
     status = session.query(ApplicationStatus).filter_by(slug=slug).first()
     print(f"Updating {status} with {test_result}...")
     status.status = test_result
     status.last_updated = datetime.now()
-    session.commit()
-    return Response(status=204)
+    session.flush()
+    return status.to_dict()
 
 
 @annotate(renderers=[JSONRenderer()])
