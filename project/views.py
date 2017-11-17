@@ -25,6 +25,7 @@ def check(session: Session, slug: str) -> Response:
     else:
         return Response(status=404)
 
+
 @annotate(renderers=[JSONRenderer()])
 def list_environments(session: Session) -> typing.List[ApplicationStatus]:
     statuses = session.query(ApplicationStatus).all()

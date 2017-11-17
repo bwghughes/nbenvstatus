@@ -4,7 +4,6 @@ from apistar import Command
 from apistar.backends import sqlalchemy_backend
 from apistar.frameworks.wsgi import WSGIApp as App
 
-from project.commands import create_envs
 from project.models import Base
 from project.routes import ROUTES
 
@@ -21,5 +20,5 @@ SETTINGS = {
 
 app = App(routes=ROUTES, 
           settings=SETTINGS,
-          commands=sqlalchemy_backend.commands + [Command('create_envs', create_envs)],
+          commands=sqlalchemy_backend.commands,
           components=sqlalchemy_backend.components)
