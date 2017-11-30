@@ -1,10 +1,10 @@
 # Installation 
 
-# Windows
+## Windows
 
 1. Install Python-3.6.3 for Windows. You can find the link at:
 
-    !!!!! Python Link !!!!!
+    [https://www.python.org/downloads/release/python-363/](Download Here)
 
 2. Create PYTHON_HOME environment variable:
 
@@ -38,6 +38,12 @@
 8. Run the dashboard server:
 
     ``` start-server.bat ```
+
+## Updating Code
+
+1. Pop into the directory and issue the following:
+
+    ``` git pull ```
 
 
 
