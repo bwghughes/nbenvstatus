@@ -31,11 +31,15 @@
 
     ``` git clone https://github.com/bwghughes/nbenvstatus.git ```
 
-7. Run the tests:
+7. Install the dependencies:
+
+    ``` pipenv install ```
+
+8. Run the tests:
 
     ``` runtests.bat ```
 
-8. Run the dashboard server:
+9. Run the dashboard server:
 
     ``` start-server.bat ```
 
