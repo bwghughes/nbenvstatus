@@ -90,3 +90,10 @@ def test_list_environments():
     response = client.get('/environments/')
     assert response.status_code == 200
     assert len(response.json()) > 0
+
+def test_health_endpoint():
+    client = TestClient(app)
+    response = client.get('/health/')
+    assert response.status_code == 200
+    
+    
