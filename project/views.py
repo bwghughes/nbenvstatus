@@ -16,8 +16,8 @@ def index(session: Session) -> Response:
     """ Root view returning Dashboard page. """
     statuses = session.query(ApplicationStatus)
     context = {'envstatus': statuses, 
-               'arrow': arrow,"
-               'page_name': os.getenv('PAGE_NAME', "No page name set"")}
+               'arrow': arrow,
+               'page_name': os.getenv('PAGE_NAME', "No page name set")}
     return render_template('index.html', **context)
 
 
