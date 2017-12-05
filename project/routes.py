@@ -1,7 +1,7 @@
 from apistar import Route, Include
 from apistar.handlers import docs_urls, serve_static, static_urls
 
-from project.views import index, update, create, check, list_environments
+from project.views import index, update, create, check, list_environments, health
 
 ROUTES = [
     Route('/', 'GET', index),
@@ -9,6 +9,7 @@ ROUTES = [
     Route('/environments/{slug}', 'GET', check),
     Route('/environments/{slug}', 'PUT', update),
     Route('/environments/', 'POST', create),
+    Route('/health/', 'GET', health),
     Route('/static/{path}', 'GET', serve_static),
     Include('/docs', docs_urls),
 ]

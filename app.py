@@ -13,7 +13,7 @@ SETTINGS = {
         'PACKAGE_DIRS': ['apistar']  # Include the built-in apistar templates.
     },
     "DATABASE": {
-        "URL": os.getenv("ENVSTATUS_DB_URL"),
+        "URL": os.getenv("ENVSTATUS_DB_URL", "sqlite:///envstatus.db"),
         "METADATA": Base.metadata
     }
 }
