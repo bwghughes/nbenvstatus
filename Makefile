@@ -1,6 +1,5 @@
 start:
 	export PAGE_NAME="Nedbank E2E" && \
-	export ENVSTATUS_DB_URL="sqlite:///envstatus.db" && \
 	apistar create_tables && \
 	apistar run
 
