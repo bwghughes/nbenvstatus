@@ -12,6 +12,7 @@ spec:
       containers:
       - name: nbenvstatus-cr1
         image: bwghughes/nbenvstatus:latest
+        imagePullPolicy: Always
         env:
         - name: PAGE_NAME
           value: "CR1 E2E Environment Monitoring"

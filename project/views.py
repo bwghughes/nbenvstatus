@@ -63,3 +63,12 @@ def create(session: Session, name: str) -> Response:
         return {'name': status.name, 'status': status.status, 'slug': status.slug}
     else:
         return Response(status=400)
+
+
+@annotate(renderers=[JSONRenderer()])
+def delete(session: Session, slug: str) -> Response:
+    """ Deletes record """
+    status = session.query(ApplicationStatus).filter_by(slug=slug).first()
+    session.delete(status)
+    session.flush()
+    return Response(status=204)
