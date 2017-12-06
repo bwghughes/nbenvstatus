@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name:  nbenvstatus-cr1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nbenvstatus-cr1
+    spec:
+      containers:
+      - name: nbenvstatus-cr1
+        image: bwghughes/nbenvstatus:latest
+        env:
+        - name: PAGE_NAME
+          value: "CR1 E2E Environment Monitoring"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nbenvstatus-cr1-svc
+  labels:
+    app: nbenvstatus-cr1
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30080
+  selector:
+    app: nbenvstatus-cr1
