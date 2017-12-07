@@ -12,6 +12,6 @@ ROUTES = [
     Route('/environments/{slug}', 'DELETE', delete),
     Route('/environments/', 'POST', create),
     Route('/health/', 'GET', health),
-    Route('/static/{path}', 'GET', serve_static),
+    Route('/statics/{path}', 'GET', serve_static),
     Include('/docs', docs_urls),
 ]

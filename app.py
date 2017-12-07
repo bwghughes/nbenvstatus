@@ -15,6 +15,10 @@ SETTINGS = {
     "DATABASE": {
         "URL": os.getenv("ENVSTATUS_DB_URL", "sqlite:///envstatus.db"),
         "METADATA": Base.metadata
+    },
+    'STATICS': {
+        'ROOT_DIR': 'statics',       # Include the 'statics/' directory.
+        'PACKAGE_DIRS': ['apistar']  # Include the built-in apistar static files.
     }
 }
 
