@@ -1,3 +1,7 @@
+# Testing Status
+
+[![CircleCI](https://circleci.com/gh/bwghughes/nbenvstatus/tree/master.svg?style=svg)](https://circleci.com/gh/bwghughes/nbenvstatus/tree/master)
+
 # Installation 
 
 ## Windows
