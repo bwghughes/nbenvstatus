@@ -31,5 +31,8 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv shell && make tests
+            pipenv run export ENVSTATUS_DB_URL=sqlite:///test.db && \
+	          apistar create_tables && \
+	          py.test --cov=project --cov-report=term-missing project tests.py && \
+	          rm -f test.db
           
